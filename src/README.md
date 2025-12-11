@@ -1,0 +1,1 @@
+This is a starter guesthouse manager created by ChatGPT. Run `npm install` then `npm run dev`.
