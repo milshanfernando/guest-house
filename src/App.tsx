@@ -19,7 +19,7 @@ export default function App() {
   const navItems = [
     { name: "Dashboard", path: "/", icon: <FiHome /> },
     { name: "Budget", path: "/budget", icon: <FiDollarSign /> },
-    { name: "Rooms", path: "/rooms", icon: <FiUser /> },
+    // { name: "Rooms", path: "/rooms", icon: <FiUser /> },
     { name: "Add Income", path: "/income", icon: <FiCreditCard /> },
     { name: "Add Expense", path: "/expenses", icon: <FiSettings /> },
   ];

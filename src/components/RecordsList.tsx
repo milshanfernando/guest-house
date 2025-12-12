@@ -1,53 +1,44 @@
-import React from "react";
-import { useGuestStore } from "../store/useGuestStore";
+import React, { useState } from "react";
+import Incomes from "./Incomes";
+import Expenses from "./Expenses";
+interface Props {
+  month: string; // pass selected month YYYY-MM-DD
+}
+const RecordsList: React.FC<Props> = ({ month }) => {
+  const [selectedMonth, setSelectedMonth] = useState<string>(month);
 
-export default function RecordsList() {
-  const income = useGuestStore((s) => s.income);
-  const expenses = useGuestStore((s) => s.expenses);
+  const handleMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedMonth(e.target.value);
+  };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
-      {/* Income Records */}
-      <div className="bg-white p-4 shadow rounded-lg">
-        <h2 className="text-xl font-semibold mb-3">Income Records</h2>
-        <ul className="space-y-2">
-          {income.map((i) => (
-            <li
-              key={i.id}
-              className="flex justify-between border p-2 rounded text-sm"
-            >
-              <span>{i.date}</span>
-              <span>AED {i.amount}</span>
-              <span>{i.note}</span>
-            </li>
-          ))}
+    <div className="mt-10">
+      {/* Month Selector */}
+      {/* <div className="mb-6 flex items-center gap-4">
+        <label htmlFor="month" className="font-medium">
+          Select Month:
+        </label>
+        <input
+          type="month"
+          id="month"
+          value={selectedMonth}
+          onChange={handleMonthChange}
+          className="border rounded p-2"
+        />
+      </div> */}
 
-          {income.length === 0 && (
-            <p className="text-gray-400 text-sm">No income records.</p>
-          )}
-        </ul>
-      </div>
-
-      {/* Expense Records */}
-      <div className="bg-white p-4 shadow rounded-lg">
-        <h2 className="text-xl font-semibold mb-3">Expense Records</h2>
-        <ul className="space-y-2">
-          {expenses.map((e) => (
-            <li
-              key={e.id}
-              className="flex justify-between border p-2 rounded text-sm"
-            >
-              <span>{e.date}</span>
-              <span>AED {e.amount}</span>
-              <span>{e.note}</span>
-            </li>
-          ))}
-
-          {expenses.length === 0 && (
-            <p className="text-gray-400 text-sm">No expense records.</p>
-          )}
-        </ul>
+      {/* Records Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
+        {/* Income Records */}
+        <Incomes month={`${month}-01`} /> {/* append day for API */}
+        {/* Expense Records */}
+        <Expenses month={`${month}-01`} />
+        {/* <div className="bg-white p-4 shadow rounded-lg">
+          <h2 className="text-xl font-semibold mb-3">Expense Records</h2>
+          <p className="text-gray-400 text-sm">No expense records.</p>
+        </div> */}
       </div>
     </div>
   );
-}
+};
+export default RecordsList;

@@ -1,16 +1,19 @@
 import { create } from "zustand";
 
 export type IncomeItem = {
-  id: string;
+  // id: string;
   amount: number;
   note?: string;
   date: string;
+  propertyName: string;
+  reportType: string;
 };
 export type ExpenseItem = {
-  id: string;
   amount: number;
   note?: string;
   date: string;
+  propertyName: string;
+  reportType: string;
 };
 export type Room = {
   id: number;
