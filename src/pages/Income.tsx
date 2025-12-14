@@ -54,8 +54,9 @@ export default function Income() {
           value={propertyName}
           onChange={(e) => setPropertyName(e.target.value)}
         >
-          <option value="Majestic Town">Majestic Town</option>
-          <option value="DSV Property">DSV Property</option>
+          <option value="Majestic Town 302">Majestic Town 302</option>
+          <option value="Majestic Town 401">Majestic Town 401</option>
+          <option value="DSV Property M2">DSV Property M2</option>
           <option value="Vouge Inn">Vouge Inn</option>
           <option value="GoHaus">GoHaus</option>
         </select>

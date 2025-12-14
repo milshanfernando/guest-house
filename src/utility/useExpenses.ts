@@ -1,22 +1,37 @@
 import { useQuery } from "@tanstack/react-query";
 import { ExpenseItem } from "../store/useGuestStore";
-import { getExpensesByMonth } from "../api/expensesApi";
+import { getExpenses, ExpenseQueryParams } from "../api/expensesApi";
 
-interface ItemQuery {
-  month: string; // YYYY-MM-DD
-}
-
-const UseExpenses = (query: ItemQuery) => {
+const UseExpenses = (query: ExpenseQueryParams) => {
   return useQuery<ExpenseItem[], Error>({
-    queryKey: ["expenses", query.month],
-    queryFn: async () => {
-      const res = await getExpensesByMonth(query.month);
-      // ensure we always return an array
-      return Array.isArray(res) ? res : [];
-    },
-    enabled: !!query.month,
+    queryKey: ["expenses", query],
+    queryFn: () => getExpenses(query),
+    enabled: Object.keys(query).length > 0,
     placeholderData: [],
   });
 };
 
 export default UseExpenses;
+
+// import { useQuery } from "@tanstack/react-query";
+// import { ExpenseItem } from "../store/useGuestStore";
+// import { getExpensesByMonth } from "../api/expensesApi";
+
+// interface ItemQuery {
+//   month: string; // YYYY-MM-DD
+// }
+
+// const UseExpenses = (query: ItemQuery) => {
+//   return useQuery<ExpenseItem[], Error>({
+//     queryKey: ["expenses", query.month],
+//     queryFn: async () => {
+//       const res = await getExpensesByMonth(query.month);
+//       // ensure we always return an array
+//       return Array.isArray(res) ? res : [];
+//     },
+//     enabled: !!query.month,
+//     placeholderData: [],
+//   });
+// };
+
+// export default UseExpenses;
